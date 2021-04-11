@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+            <variable
+                name="PopularTvShows"
+                type="com.info.tvshowjava.models.PopularTvShows" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="3"
+            android:background="@color/primary"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/temp"
+                    tools:srcCompat="@drawable/temp" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/primary"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{PopularTvShows.name}"
+                    android:textAlignment="center"
+                    android:textColor="@color/accent" />
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.4dp"
+                    android:background="@color/secondary_text" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{PopularTvShows.start_date}"
+                    android:textAlignment="center"
+                    android:textColor="@color/accent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@{PopularTvShows.end_date}"
+                    android:textAlignment="center"
+                    android:textColor="@color/accent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@{PopularTvShows.network}"
+                android:textAlignment="center"
+                android:textColor="@color/accent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingStart="5dp"
+                    android:text="@{PopularTvShows.country}"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/accent"
+                    tools:ignore="RtlSymmetry" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingEnd="5dp"
+                    android:text="@{PopularTvShows.status}"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/accent"
+                    tools:ignore="RtlSymmetry" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
