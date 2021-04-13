@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity  implements TvShowListener {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         initialize();
-
         getTvShows_main();
 
     }
@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity  implements TvShowListener {
 
     @Override
     public void onClickTvShow(PopularTvShows popularTvShows) {
-
+        Intent intent = new Intent(this,DetailActivity.class);
+        intent.putExtra("tvShow",popularTvShows);
+        startActivity(intent);
         Log.e("Main" , "Mainde tıkladnı . " + popularTvShows.getName());
     }
 }

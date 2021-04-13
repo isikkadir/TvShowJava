@@ -3,7 +3,9 @@ package com.info.tvshowjava.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PopularTvShows {
+import java.io.Serializable;
+
+public class PopularTvShows implements Serializable {
 
     public PopularTvShows() {
     }
