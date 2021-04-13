@@ -16,19 +16,16 @@ import retrofit2.Response;
 public class PopularTvShowsRepository {
     private ApiService apiService;
     public PopularTvShowsRepository() {
-        Log.e("Repo", "ApiService create");
         apiService = ApiClient.getRetrofit().create(ApiService.class);
     }
 
 
 
     public LiveData<PopularTvShowsResponse> getTvShows_repo(int page) {
-        Log.e("Repo", "getTvShows_repo");
         MutableLiveData<PopularTvShowsResponse> data = new  MutableLiveData<>();
         apiService.getTvShows_api(page).enqueue(new Callback<PopularTvShowsResponse>() {
             @Override
             public void onResponse(Call<PopularTvShowsResponse> call, Response<PopularTvShowsResponse> response) {
-                Log.e("Repo", "Tv show getirilecek");
                 data.setValue(response.body());
             }
 

@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             if (TVShowResponse != null) {
                 if (TVShowResponse.getTv_shows() != null) {
                     int oldCount = popularTvShowsList.size();
-                    Log.e("Main", "Tv show getirilecek");
                     Log.e(TAG, "Liste eleman sayısı : " + popularTvShowsList.size());
 
                     popularTvShowsList.addAll(TVShowResponse.getTv_shows());
@@ -80,16 +79,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void setLoadingStatement() {
-        Log.e(TAG, "setLoadingStatement girildi. current: " + currentPage + "total: " + totalPage + "setIsLoading: " + activityMainBinding.getIsLoadingMore());
-        if (currentPage == 1) {
-
-            if (activityMainBinding.getIsLoadingMore() != null && activityMainBinding.getIsLoadingMore()) {
-                activityMainBinding.setIsLoadingMore(false);
-                activityMainBinding.setIsLoadingMore(true);
-            }
-        }
     }
 }
