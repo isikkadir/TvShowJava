@@ -1,5 +1,6 @@
 package com.info.tvshowjava.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.info.tvshowjava.R;
 import com.info.tvshowjava.databinding.TvshowLayoutItemBinding;
+import com.info.tvshowjava.listeners.TvShowListener;
 import com.info.tvshowjava.models.PopularTvShows;
 
 import java.util.List;
@@ -18,8 +20,10 @@ public class PopularTvShowsAdapter extends RecyclerView.Adapter<PopularTvShowsAd
 
     private List<PopularTvShows> tvShowsList;
     private LayoutInflater inflater;
-    public PopularTvShowsAdapter(List<PopularTvShows> TvShowList){
+    private TvShowListener listener;
+    public PopularTvShowsAdapter(List<PopularTvShows> TvShowList , TvShowListener listener){
         this.tvShowsList = TvShowList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,6 +40,10 @@ public class PopularTvShowsAdapter extends RecyclerView.Adapter<PopularTvShowsAd
     @Override
     public void onBindViewHolder(@NonNull PopularTvShowsViewHolder holder, int position) {
         holder.tvshowLayoutItemBinding.setPopularTvShows(tvShowsList.get(position));
+        holder.tvshowLayoutItemBinding.getRoot().setOnClickListener(v -> {
+            Log.e("MSg" , "Tıklandı" + tvShowsList.get(position).getName());
+            listener.onClickTvShow(tvShowsList.get(position));
+        });
         holder.tvshowLayoutItemBinding.executePendingBindings();
     }
 
@@ -44,7 +52,7 @@ public class PopularTvShowsAdapter extends RecyclerView.Adapter<PopularTvShowsAd
         return tvShowsList.size();
     }
 
-    static class PopularTvShowsViewHolder extends RecyclerView.ViewHolder{
+    class PopularTvShowsViewHolder extends RecyclerView.ViewHolder{
         private TvshowLayoutItemBinding tvshowLayoutItemBinding;
         public PopularTvShowsViewHolder(@NonNull TvshowLayoutItemBinding tvshowLayoutItemBinding) {
             super(tvshowLayoutItemBinding.getRoot());

@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.info.tvshowjava.adapters.PopularTvShowsAdapter;
 import com.info.tvshowjava.databinding.ActivityMainBinding;
+import com.info.tvshowjava.listeners.TvShowListener;
 import com.info.tvshowjava.models.PopularTvShows;
 import com.info.tvshowjava.models.PopularTvShowsResponse;
 import com.info.tvshowjava.viewmodels.PopularTvShowsViewModel;
@@ -21,10 +23,10 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements TvShowListener {
     String TAG = "Main";
     private ActivityMainBinding activityMainBinding;
-    private List<PopularTvShows> popularTvShowsList = new ArrayList<>();
+    private final List<PopularTvShows> popularTvShowsList = new ArrayList<>();
     private PopularTvShowsAdapter adapter;
     private PopularTvShowsViewModel popularTvShowsViewModel;
     private int currentPage;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void initialize() {
         currentPage = 1;
         activityMainBinding.recyclerView.setHasFixedSize(true);
-        adapter = new PopularTvShowsAdapter(popularTvShowsList);
+        adapter = new PopularTvShowsAdapter(popularTvShowsList,this);
         activityMainBinding.recyclerView.setAdapter(adapter);
         activityMainBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         activityMainBinding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -68,16 +70,19 @@ public class MainActivity extends AppCompatActivity {
         popularTvShowsViewModel.getTvShows_viewModel(currentPage).observe(this, TVShowResponse -> {
             totalPage = parseInt(TVShowResponse.getPages());
             activityMainBinding.setIsLoadingMore(false);
-            if (TVShowResponse != null) {
-                if (TVShowResponse.getTv_shows() != null) {
-                    int oldCount = popularTvShowsList.size();
-                    Log.e(TAG, "Liste eleman sayısı : " + popularTvShowsList.size());
+            if (TVShowResponse.getTv_shows() != null) {
+                Log.e(TAG, "Liste eleman sayısı : " + popularTvShowsList.size());
 
-                    popularTvShowsList.addAll(TVShowResponse.getTv_shows());
-                    adapter.notifyDataSetChanged();
-                }
+                popularTvShowsList.addAll(TVShowResponse.getTv_shows());
+                adapter.notifyDataSetChanged();
             }
         });
 
+    }
+
+    @Override
+    public void onClickTvShow(PopularTvShows popularTvShows) {
+
+        Log.e("Main" , "Mainde tıkladnı . " + popularTvShows.getName());
     }
 }
