@@ -25,7 +25,7 @@
         <View
             android:layout_width="wrap_content"
             android:id="@+id/viewFadingEdge"
-            android:layout_height="40dp"
+            android:layout_height="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +33,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:id="@+id/linearLayout"
             android:orientation="horizontal"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/viewFadingEdge"
