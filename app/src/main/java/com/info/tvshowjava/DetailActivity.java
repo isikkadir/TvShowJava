@@ -44,6 +44,12 @@ public class DetailActivity extends AppCompatActivity {
         Intent getIntent = getIntent();
         comingPopularTvShows = (PopularTvShows) getIntent.getSerializableExtra("tvShow");
         tvShowsDetailsViewModel = new ViewModelProvider(this).get(TvShowsDetailsViewModel.class);
+        activityDetailBinding.backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getTvShowsDetails(PopularTvShows comingPopularTvShows) {
