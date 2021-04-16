@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TvShowJava</string>
     <string name="popular_tv_show_list">Popular Tv Show List</string>
+    <string name="read_more">Read More</string>
+    <string name="read_less">Read Less</string>
+    <string name="u2022">u2022</string>
+    <string name="website">WEBSITE</string>
+    <string name="episode">EPISODE</string>
 </resources>

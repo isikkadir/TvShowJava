@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -44,20 +45,46 @@ public class DetailActivity extends AppCompatActivity {
         Intent getIntent = getIntent();
         comingPopularTvShows = (PopularTvShows) getIntent.getSerializableExtra("tvShow");
         tvShowsDetailsViewModel = new ViewModelProvider(this).get(TvShowsDetailsViewModel.class);
-        activityDetailBinding.backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        activityDetailBinding.backArrow.setOnClickListener(v -> onBackPressed());
     }
 
     private void getTvShowsDetails(PopularTvShows comingPopularTvShows) {
         tvShowsDetailsViewModel.getTvShowsDetails_viewModel(comingPopularTvShows.getId()).observe(this, TvShowDetails -> {
             Log.e("Getirildi", "Getirilen : " + TvShowDetails.getTvShow().getUrl());
             loadImages(TvShowDetails.getTvShow().getPictures());
-
+            setDetails(TvShowDetails);
+            textReadMoreClickListener();
+            buttonEvent(TvShowDetails);
         });
+    }
+
+    private void buttonEvent(TvShowDetails tvShowDetails) {
+        activityDetailBinding.buttonWebsite.setOnClickListener(v -> {
+            Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
+            websiteIntent.setData(Uri.parse(tvShowDetails.getTvShow().getUrl()));
+            startActivity(websiteIntent);
+        });
+        activityDetailBinding.buttonEpisode.setOnClickListener(v -> {
+            
+        });
+    }
+
+    private void textReadMoreClickListener() {
+        activityDetailBinding.textReadmore.setOnClickListener(v -> {
+            if(activityDetailBinding.textReadmore.getText().equals("Read More")){
+                activityDetailBinding.textReadmore.setText(R.string.read_less);
+                activityDetailBinding.textDescription.setMaxLines(Integer.MAX_VALUE);
+            }else{
+                activityDetailBinding.textReadmore.setText(R.string.read_more);
+                activityDetailBinding.textDescription.setMaxLines(4);
+            }
+        });
+    }
+
+    private void setDetails(TvShowDetails TvShowDetails) {
+        activityDetailBinding.setTvShowPath(TvShowDetails);
+        activityDetailBinding.card.setVisibility(View.VISIBLE);
+        activityDetailBinding.linearLayoutDetails.setVisibility(View.VISIBLE);
     }
 
     private void loadImages(String[] images) {
